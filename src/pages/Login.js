@@ -2,9 +2,15 @@ import React from 'react';
 import { Container, FormControl, InputLabel, Input, Grid, Button } from '@material-ui/core';
 
 class Login extends React.Component{
-    test(event) {
-
-      fetch("http://localhost:3002/login")
+    handleLogin(event) {
+      fetch("http://localhost:3002/login",{
+        method: "POST",
+        body: JSON.stringify({"email": event.target.email.value,
+                             "password": event.target.password.value}),
+        headers: {
+            "Content-Type": "application/json",
+        },
+      })
         .then(response => response.json())
         .then(data => console.log(data));
         
@@ -15,7 +21,7 @@ class Login extends React.Component{
         return (
             <Container maxWidth="sm">
 
-                <form onSubmit={this.test}>
+                <form onSubmit={this.handleLogin}>
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <FormControl>
@@ -27,7 +33,7 @@ class Login extends React.Component{
                         <Grid item xs={12}>
                             <FormControl>
                                 <InputLabel htmlFor="password">Password</InputLabel>
-                                <Input id="password"/>
+                                <Input id="password" type="password"/>
                             </FormControl>
                         </Grid> 
 

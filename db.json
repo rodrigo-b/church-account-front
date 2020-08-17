@@ -1,8 +1,5 @@
 {
-   "login": 
-	{
-	     "email": "teste@gmail.com",
-	     "password": "teste"
-   	}
-    
+  "login": {
+    "name": "Foobar"
+  }
 }
