@@ -84,6 +84,18 @@ function ExpensesForm(){
                         value={values.isPermanent}
                         onChange={handleInputChange}
                     />
+
+
+                    <div>
+                        <Controls.Button
+                            type="submit"
+                            text="submit"
+                        />
+                        <Controls.Button
+                            text="Reset"
+                            color="default"
+                        />                        
+                    </div>
                     </Grid>
 
                 </Grid>
