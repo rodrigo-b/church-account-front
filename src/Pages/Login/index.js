@@ -21,7 +21,7 @@ class Login extends React.Component{
         return (
             <Container maxWidth="sm">
 
-                <form onSubmit={this.handleLogin}>
+                <form onSubmit={this.handleLogin}  align="center">
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <FormControl>
