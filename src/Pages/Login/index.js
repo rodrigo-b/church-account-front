@@ -1,12 +1,16 @@
 import React from 'react';
-import { Container, FormControl, InputLabel, Input, Grid, Button } from '@material-ui/core';
+import { Container, FormControl, Grid, Button } from '@material-ui/core';
+import { Form, Field } from 'react-final-form'
+import { Text } from '../../components/Input'
+import { required, minLength, email, composeValidators } from '../../validators'
+
 
 class Login extends React.Component{
-    handleLogin(event) {
+    handleLogin(values) {
+      console.log(values)
       fetch("http://localhost:3002/login",{
         method: "POST",
-        body: JSON.stringify({"email": event.target.email.value,
-                             "password": event.target.password.value}),
+        body: JSON.stringify(values),
         headers: {
             "Content-Type": "application/json",
         },
@@ -14,38 +18,51 @@ class Login extends React.Component{
         .then(response => response.json())
         .then(data => console.log(data));
         
-        event.preventDefault()
     }
     
     render() {
         return (
             <Container maxWidth="sm">
 
-                <form onSubmit={this.handleLogin}  align="center">
+                <Form
+                    onSubmit={this.handleLogin}
+                    render={({ handleSubmit, submitting }) => (
+                <form onSubmit={handleSubmit}  align="center">
                     <Grid container spacing={3}>
                         <Grid item xs={12}>
                             <FormControl>
-                                <InputLabel htmlFor="email">Email</InputLabel>
-                                <Input id="email"/>
+                                <Field
+                                    name="email"
+                                    label="Email"
+                                    component={Text}
+                                    validate={composeValidators(required, email)}
+                                    type="text"
+                                />
                             </FormControl>
                         </Grid>            
 
                         <Grid item xs={12}>
                             <FormControl>
-                                <InputLabel htmlFor="password">Password</InputLabel>
-                                <Input id="password" type="password"/>
+                                <Field
+                                    name="password"
+                                    label="Password"
+                                    component={Text}
+                                    validate={composeValidators(required, minLength(8))}
+                                    type="password"
+                                />
                             </FormControl>
                         </Grid> 
 
                         <Grid item xs={12}>
-                            <Button type="submit">
+                            <Button type="submit" disabled={submitting}>
                                 Log in
                             </Button>
                         </Grid>
 
                     </Grid>
                 </form>
-
+                )}
+                />
             </Container>
       );
     }
