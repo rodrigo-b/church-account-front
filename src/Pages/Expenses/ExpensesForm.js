@@ -20,6 +20,7 @@ const initialValues = {
     isPermanent: false,
 }
 
+
 function ExpensesForm(){
 
 
@@ -30,10 +31,20 @@ function ExpensesForm(){
     } = UseForm(initialValues);
 
 
+    const handleSubmit = e => {
+
+        e.preventDefault();
+       // expenseService.createExpense(e);
+        console.log('Chamou a acao')
+    }
 
     return (
         
-            <Form>
+            <Form onSubmit={(e) => {
+                e.preventDefault();
+                // expenseService.createExpense(e);
+                 console.log('Chamou a acao')         
+            }}>
                 <Grid container>
                     <Grid item xs={6}>
                         <Controls.Input 
@@ -86,20 +97,21 @@ function ExpensesForm(){
                     />
 
 
-                    <div>
-                        <Controls.Button
-                            type="submit"
-                            text="submit"
-                        />
-                        <Controls.Button
-                            text="Reset"
-                            color="default"
-                        />                        
-                    </div>
+         
                     </Grid>
-
                 </Grid>
+                <div>
+                            <Controls.Button
+                                type="submit"
+                                text="submit"                               
+                            />
+                            <Controls.Button
+                                text="Reset"
+                                color="default"
+                            />                        
+                        </div>
             </Form>
+                    
         
     )
 

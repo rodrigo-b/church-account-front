@@ -18,7 +18,7 @@ function Button(props){
 
     return(
         <MuiButton
-        
+            type="button"
             variant={variant || "contained"}
             size={size || "large"}
             color={color || "primary"}
