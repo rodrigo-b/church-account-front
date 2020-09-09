@@ -17,8 +17,8 @@ function Expenses(){
     return (
        <>
         <PageHeader 
-            title="New Expense"
-            subTitle="Expense Form"
+            title="Entrada"
+            subTitle="Formulario de entrada"
             icon=""
         />
 

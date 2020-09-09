@@ -1,5 +1,6 @@
 import React, {useState} from 'react'
 import { makeStyles} from "@material-ui/core"
+import { datePickerDefaultProps } from '@material-ui/pickers/constants/prop-types';
 
 export function UseForm(initialValues){
 
@@ -37,7 +38,7 @@ export function Form(props){
     const classes = useStyles();
 
     return(
-        <form className={classes.root} autoComplete="off">
+        <form onSubmit={props.onSubmit} className={classes.root} autoComplete="off" alignContent="center">
             {props.children}
         </form>
     )

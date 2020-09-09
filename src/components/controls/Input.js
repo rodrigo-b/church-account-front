@@ -4,7 +4,7 @@ import {TextField} from '@material-ui/core';
 function Input (props){
 
 
-    const {name,label,value,onChange} = props;
+    const {name,label,value,type,onChange} = props;
 
     return (
             <TextField
@@ -12,6 +12,7 @@ function Input (props){
                         label={label}
                         name={name}
                         value={value}
+                        type={type}
                         onChange = {onChange}
             />
     )

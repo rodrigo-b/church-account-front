@@ -7,10 +7,9 @@ export const getDepartmentCollection = () => ([
 ])
 
 
-export function createExpense(props){
+export function createExpense(values){
 
-    
-    const apiUrl = "http://localhost:8080/v1/expenses";
+        const apiUrl = "http://localhost:8080/v1/expenses";
 
     let headers = new Headers();
 
@@ -18,8 +17,8 @@ export function createExpense(props){
     headers.append('Accept', 'application/json');
 
 
-    let nameValue = props.name.value;
-    let responsibleValue = props.responsible.value;
+    let nameValue = values.name;
+    let responsibleValue = values.responsible;
     let amountValue = 10;
     let creationDateValue = new Date();
 

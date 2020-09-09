@@ -2,11 +2,11 @@ import React from 'react'
 import {  Grid } from '@material-ui/core';
 import {UseForm,Form} from '../../components/UseForm'
 import Controls from '../../components/controls/Controls'
-import * as expenseService from '../../services/expensesService'
+import * as expenseService from '../../services/depositServices'
 
-const testItems = [
-    {id:'valor1', title:'valor1'},
-    {id:'valor2', title:'valor2'}
+const expenseItems = [
+    {id:'DEBITO', title:'DEBITO'},
+    {id:'CREDITO', title:'CREDITO'}
 ]
 
 const initialValues = {
@@ -15,9 +15,10 @@ const initialValues = {
     responsible: '',
     amount: 0,
     creationDate: new Date(),
-    test:'valor2',
+    paymentType:'DEBITO',
     departmentId:'',
     isPermanent: false,
+    amount:0
 }
 
 
@@ -31,70 +32,60 @@ function ExpensesForm(){
     } = UseForm(initialValues);
 
 
-    const handleSubmit = e => {
-
-        e.preventDefault();
-       // expenseService.createExpense(e);
-        console.log('Chamou a acao')
-    }
-
     return (
         
-            <Form onSubmit={(e) => {
-                e.preventDefault();
-                // expenseService.createExpense(e);
-                 console.log('Chamou a acao')         
-            }}>
+            <Form  onSubmit= {(e) => {
+                        e.preventDefault();
+                        expenseService.createDeposit(values);
+                           
+                    }} >
                 <Grid container>
                     <Grid item xs={6}>
                         <Controls.Input 
                             name="name"
-                            label="Full Name"
+                            label="Nome Completo"
+                            type="text"
                             value={values.name}
                             onChange={handleInputChange}
                         />
 
                         <Controls.Input
                             variant="outlined"
-                            label="Responsible"
+                            label="Responsavel"
                             name="responsible"
+                            type="text"
                             value={values.responsible}
                             onChange={handleInputChange}
                         />
-                    </Grid>
-                    <Grid item xs={6}>
+            
 
                         <Controls.RadioGroup
-                            name="test"
-                            label="test"
-                            value={values.test}
+                            name="paymentType"
+                            label="tipo de pagamento"
+                            value={values.paymentType}
                             onChange = {handleInputChange}
-                            items = {testItems}
+                            items = {expenseItems}
 
                         />
 
-                    <Controls.Select
-                        name="departmentId"
-                        label="Department"
-                        value={values.departmentId}
-                        onChange={handleInputChange}
-                        options={expenseService.getDepartmentCollection()}
-                    />
 
-                    <Controls.DatePicker
-                        name="creationDate"
-                        label="Creation Date"
-                        value={values.creationDate}
-                        onChange={handleInputChange}                            
-                    />
+                        <Controls.Input
+                            variant="outlined"
+                            label="valor"
+                            name="amount"
+                            type="number"
+                            value={values.amount}
+                            onChange={handleInputChange}
+                        />
+
+
+                        <Controls.DatePicker
+                            name="creationDate"
+                            label="Data da entrada"
+                            value={values.creationDate}
+                            onChange={handleInputChange}                            
+                        />
                     
-
-                    <Controls.Checkbox
-                        name="isPermanent"
-                        label="Permanent Expense"
-                        value={values.isPermanent}
-                        onChange={handleInputChange}
-                    />
 
 
          
