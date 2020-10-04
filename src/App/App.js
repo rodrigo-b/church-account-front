@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Login from '../Pages/Login'
-import { makeStyles, createMuiTheme, ThemeProvider, MuiAppBar } from '@material-ui/core';
+import { makeStyles, createMuiTheme, ThemeProvider, MuiAppBar,Menu, MenuItem,Button } from '@material-ui/core';
 import SideMenu from '../components/SideMenu'
 import Header from '../components/Header';
 import Expenses from '../Pages/Expenses/Expenses';
@@ -30,16 +30,26 @@ const useStyles = makeStyles({
 
 
 function App() {
+
+  const [anchorEl, setAnchorEl] = React.useState(null);
+
+
   const classes = useStyles();
+
+  const handleClick = (event) => {
+    setAnchorEl(event.currentTarget);
+  };
+
+  const handleClose = () => {
+    setAnchorEl(null);
+  };
+
 
   return (
     <ThemeProvider theme={theme}>
-    <SideMenu/>
-      <div className={classes.appMain}>
-        <Header />
-   
-        <Expenses/>
-      </div>
+    <SideMenu>
+      <Menu/>
+    </SideMenu>
 
     </ThemeProvider>  
   );

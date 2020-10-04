@@ -5,10 +5,10 @@ import Controls from '../../components/controls/Controls'
 import * as expenseService from '../../services/depositServices'
 
 const expenseItems = [
-    {id:'DEBITO', title:'DEBITO'},
-    {id:'CREDITO', title:'CREDITO'},
-    {id:'CHEQUE', title:'CHEQUE'},
-    {id:'DINHEIRO', title:'DINHEIRO'}
+    {id:'AGUA', title:'AGUA'},
+    {id:'LUZ', title:'LUZ'},
+    {id:'IMPOSTO', title:'IMPOSTO'},
+    {id:'REFORMA', title:'REFORMA'}
 ]
 
 const initialValues = {
@@ -17,14 +17,14 @@ const initialValues = {
     responsible: '',
     amount: 0,
     creationDate: new Date(),
-    paymentType:'DEBITO',
+    expenseType:'AGUA',
     departmentId:'',
     isPermanent: false,
     amount:0
 }
 
 
-function ExpensesForm(){
+function DepositForm(){
 
 
     const{
@@ -62,9 +62,9 @@ function ExpensesForm(){
                                     
 
                         <Controls.Select
-                            name="paymentType"
-                            label="tipo de pagamento"
-                            value={values.paymentType}
+                            name="expenseType"
+                            label="tipo de gasto"
+                            value={values.expenseType}
                             onChange={handleInputChange}
                             options={expenseItems}
                         />
@@ -109,4 +109,4 @@ function ExpensesForm(){
 
 }
 
-export default ExpensesForm;
+export default DepositForm;
