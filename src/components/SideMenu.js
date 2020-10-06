@@ -1,107 +1,159 @@
-import React from 'react'
-import {makeStyles, withStyles, Menu, MenuItem} from '@material-ui/core'
-import HomeIcon from "@material-ui/icons/Home";
-import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
-import InfoIcon from '@material-ui/icons/Info';
-import Header from '../components/Header';
-
-import {
-  Drawer, List, ListItem,
-  ListItemIcon, ListItemText,
-  Container, Typography,
-} from "@material-ui/core";
-
+import React from 'react';
+import clsx from 'clsx';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Drawer from '@material-ui/core/Drawer';
+import AppBar from '@material-ui/core/AppBar';
+import Toolbar from '@material-ui/core/Toolbar';
+import List from '@material-ui/core/List';
+import CssBaseline from '@material-ui/core/CssBaseline';
+import Typography from '@material-ui/core/Typography';
+import Divider from '@material-ui/core/Divider';
+import IconButton from '@material-ui/core/IconButton';
+import MenuIcon from '@material-ui/icons/Menu';
+import ChevronLeftIcon from '@material-ui/icons/ChevronLeft';
+import ChevronRightIcon from '@material-ui/icons/ChevronRight';
+import ListItem from '@material-ui/core/ListItem';
+import ListItemIcon from '@material-ui/core/ListItemIcon';
+import ListItemText from '@material-ui/core/ListItemText';
+import InboxIcon from '@material-ui/icons/MoveToInbox';
+import MailIcon from '@material-ui/icons/Mail';
 import {
   BrowserRouter as Router,
   Switch, Route, Link
 } from "react-router-dom";
-
+import HomeIcon from "@material-ui/icons/Home";
+import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
 import DepositForm from '../Pages/Deposit/DepositForm'
 import ExpensesForm from '../Pages/Expenses/ExpensesForm';
 
-
 const drawerWidth = 240;
-  
+
 const useStyles = makeStyles((theme) => ({
-    sideMenu:{
-        display: 'flex',
-        flexDirection: 'column',
-        position: 'absolute',
-        left: '0px',
-        width: '320px',
-        height: '100%',
-        backgroundColor: 'darkolivegreen'    
+  root: {
+    display: 'flex',
+  },
+  appBar: {
+    zIndex: theme.zIndex.drawer + 1,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+  },
+  appBarShift: {
+    marginLeft: drawerWidth,
+    width: `calc(100% - ${drawerWidth}px)`,
+    transition: theme.transitions.create(['width', 'margin'], {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  menuButton: {
+    marginRight: 36,
+  },
+  hide: {
+    display: 'none',
+  },
+  drawer: {
+    width: drawerWidth,
+    flexShrink: 0,
+  },
+  drawerOpen: {
+    width: drawerWidth,
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.enteringScreen,
+    }),
+  },
+  drawerClose: {
+    transition: theme.transitions.create('width', {
+      easing: theme.transitions.easing.sharp,
+      duration: theme.transitions.duration.leavingScreen,
+    }),
+    overflowX: 'hidden',
+    width: theme.spacing(7) + 1,
+    [theme.breakpoints.up('sm')]: {
+      width: theme.spacing(9) + 1,
     },
-
-    root: {
-      display: 'flex',
-    },
-    appBar: {
-      width: `calc(100% - ${drawerWidth}px)`,
-      marginLeft: drawerWidth,
-    },
-    drawer: {
-      width: drawerWidth,
-      flexShrink: 0,
-    },
-    drawerPaper: {
-      width: drawerWidth,
-    },
-    // necessary for content to be below app bar
-    toolbar: theme.mixins.toolbar,
-    content: {
-      flexGrow: 1,
-      backgroundColor: theme.palette.background.default,
-      padding: theme.spacing(3),
-    },
-    
-    drawerPaper: { width: 'inherit' },
-
+  },
+  drawerPaper: {
+    width: drawerWidth,
+  },
+  appMain:{
+    paddingLeft:'620px',
+    width:'100%'
+  },
     link: {
       textDecoration: 'none',
       color: theme.palette.text.primary
     },
+  toolbar: {
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'flex-end',
+    padding: theme.spacing(0, 1),
+    // necessary for content to be below app bar
+    ...theme.mixins.toolbar,
+  },
+  content: {
+    flexGrow: 1,
+    padding: theme.spacing(3),
+  },
+}));
 
-    appMain:{
-      paddingLeft:'320px',
-      width:'100%'
-    }
+export default function SideMenu(props) {
+  const classes = useStyles();
+  const theme = useTheme();
+  const [open, setOpen] = React.useState(false);
 
-  }));
+  const handleDrawerOpen = () => {
+    setOpen(true);
+  };
 
+  const handleDrawerClose = () => {
+    setOpen(false);
+  };
 
-  const handleDepositClick = event => {  
-    console.log("CAIXA");  
-  }; 
+  return (
+    <Router>
+    <div className={classes.root}>
+      <CssBaseline />
+      <AppBar
+        position="fixed"
+        className={clsx(classes.appBar, {
+          [classes.appBarShift]: open,
+        })}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            onClick={handleDrawerOpen}
+            edge="start"
+            className={clsx(classes.menuButton, {
+              [classes.hide]: open,
+            })}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap>
+            Sistema financeiro
+          </Typography>
+        </Toolbar>
+      </AppBar>
+   
+      <Drawer
+        variant="permanent"
+        anchor="left"
+        classes={{ paper: classes.drawerPaper }}
+      >
+        <div className={classes.toolbar}>
+          <IconButton onClick={handleDrawerClose}>
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        </div>
+ 
 
-  const handleReportClick = event => {  
-    console.log("RELATORIO");  
-  }; 
-
-  const handleMemberClick = event => {  
-    console.log("MEMBROS");  
-  }; 
-
-  const handleExpensesClick = event => {  
-    console.log("DESPESAS");  
-  }; 
-
-function SideMenu(props){
-
-    const classes = useStyles();
-
-    console.log(props);
-    return(                    
-      <Router>
-      <div style={{ display: 'flex' }}  >
-        <Drawer
-          style={{ width: '220px' }}
-          variant="persistent"
-          anchor="left"
-          open={true}
-          classes={{ paper: classes.drawerPaper }}
-        >
-          <List>
+        <List>
             <Link to="/" className={classes.link}>
               <ListItem button>
                 <ListItemIcon>
@@ -142,9 +194,9 @@ function SideMenu(props){
                 <ListItemText primary={"Despesas"} />
               </ListItem>
             </Link>
-          </List>
-        </Drawer>
-        <Switch>
+          </List>        
+      </Drawer>
+      <Switch>
           <Route exact path="/">
 
           </Route>
@@ -168,9 +220,7 @@ function SideMenu(props){
             </div>     
           </Route>                                  
         </Switch>
-      </div>
+    </div>
     </Router>
-    );
+  );
 }
-
-export default SideMenu;

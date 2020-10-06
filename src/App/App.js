@@ -47,6 +47,7 @@ function App() {
 
   return (
     <ThemeProvider theme={theme}>
+
     <SideMenu>
       <Menu/>
     </SideMenu>
