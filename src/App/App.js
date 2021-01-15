@@ -48,10 +48,13 @@ function App() {
   return (
     <ThemeProvider theme={theme}>
 
-    <SideMenu>
+    {/* 
+      <SideMenu>
       <Menu/>
     </SideMenu>
-
+    */} 
+    
+    <Login/>
     </ThemeProvider>  
   );
 }

@@ -25,6 +25,7 @@ import HomeIcon from "@material-ui/icons/Home";
 import AccountBalanceWalletIcon from "@material-ui/icons/AccountBalanceWallet";
 import DepositForm from '../Pages/Deposit/DepositForm'
 import ExpensesForm from '../Pages/Expenses/ExpensesForm';
+import Login from '../Pages/Login';
 
 const drawerWidth = 240;
 
@@ -197,8 +198,10 @@ export default function SideMenu(props) {
           </List>        
       </Drawer>
       <Switch>
-          <Route exact path="/">
-
+          <Route exact path="/login">
+              <div>
+                  <Login/>
+              </div>
           </Route>
           <Route exact path="/">
 
